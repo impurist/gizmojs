@@ -1,0 +1,17 @@
+gizmo.js
+
+Pure javascript port of the Gizmo (Ruby) page model framework (http://gizmo-gem.info/).
+
+The intention here is to provide dynamic Screen models for testing iOS apps with the UIAutomation framework provided by Apple.
+
+I am using node.js here to make it easy to test drive with Jasmine. 
+
+
+dependencies:
+
+node.js (for running specs)
+underscore.js (specs and usage)
+
+
+
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+node spec/node-suite.js --color
