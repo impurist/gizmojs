@@ -1,6 +1,8 @@
 gizmo.js
 
 Pure javascript port of the Gizmo (Ruby) page model framework (http://gizmo-gem.info/).
+Credit for the idea of gizmo.js & some initial code goes to Luke Cunningham (https://github.com/icaruswings)
+the primary author of the Gizmo Ruby gem.
 
 The intention here is to provide dynamic Screen models for testing iOS apps with the UIAutomation framework provided by Apple.
 
