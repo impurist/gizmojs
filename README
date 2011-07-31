@@ -4,14 +4,83 @@ Pure javascript port of the Gizmo (Ruby) page model framework (http://gizmo-gem.
 
 The intention here is to provide dynamic Screen models for testing iOS apps with the UIAutomation framework provided by Apple.
 
+This is a work in progress thus the warning: "Here be Dragons"!
+
+A contrived UIAutomation example using jasmine-iphone & gizmo.js:
+
+var target = UIATarget.localTarget();
+var app = getTarget().frontMostApp();
+var window = app.getMainWindow();
+var cells = window.tableViews()[0].cells();
+var buttons = window.buttons();
+
+login = {
+
+  enterUserName: function(userName) {
+    cell.textFields()[0].setValue(userName);
+  },
+  enterPassword: function(password) {
+    cells.textFields()[1].setValue(password);
+  },
+
+  loginButton: function(){
+    return buttons.firstWithName("Login");
+  },
+  
+  welcomeMessage: function(){
+    return window.staticTexts[0];
+  }
+}
+
+logout = {
+  
+  logoutButton: function(){
+    return buttons.firstWithName("Logout`");
+  },
+  logoutMessage: function(){
+    return window.staticTexts[0];
+  }
+}
+
+
+describe("Login/Logout", function() {
+
+  it("should successfully login with user name and password, then logout", function() {
+    Gizmo.onScreenWith(login, logout, function(screen){
+      screen.enterUserName("Joe");
+      screen.enterPassword("foobar");
+      screen.loginButton().tap();
+      target.delay(5); 
+      
+      expect(screen.welcomeMessage()).toEqual("Login successful");
+      screen.logout().tap();
+      target.delay(5); 
+      expect(screen.logoutMessage()).toEqual("Logout successful");
+    });
+  });
+
+});
+
+The point of gizmojs is to provide a simple way to mix in a collection of hashes into an instance of Screen.
+each hash contains properties and methods that either extract out a UI element or it's value and perform actions
+to drive the tests. 
+
+Note the use of "target.delay(5)"
+This is not recommended practice, as hard coded waits can be not deterministic.
+I am seeking a more robust technique which wait for an element to become visible.
+
 I am using node.js here to make it easy to test drive with Jasmine. 
 
+node.js and underscore.js dont play nice together by default.
+as a quick workaround I have name spaced the "_" to "_u"
+for writing and running specs with node
 
-dependencies:
+submodules:
+jamsine (BDD js test framework)
+underscore.js (handy language extensions)
 
-node.js (for running specs)
-underscore.js (specs and usage)
-
+currently external dependencies:
+node.js (for running specs) I happen to be using v0.4.9
 
 
 
