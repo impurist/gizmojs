@@ -68,7 +68,10 @@ each hash contains properties and methods that either extract out a UI element o
 to drive the tests. 
 
 Note the use of "target.delay(5)"
-This is not recommended practice, as hard coded waits can be not deterministic.
+This is not recommended practice, as hard coded waits can be non deterministic.
+jasmine has waits() run() waitFor() methods for testing asynchronous behaviour
+
+
 I am seeking a more robust technique which wait for an element to become visible.
 
 I am using node.js here to make it easy to test drive with Jasmine. 
